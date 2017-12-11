@@ -1,0 +1,1 @@
+# slider_namespace_pattern
