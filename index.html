@@ -1,0 +1,35 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <header id='header'></header>
+
+        <!-- Javascript -->
+        <!-- script src="./js/polyfill/ObjectAssign.js"></script -->
+        <script src="./js/slider/Slider.js"></script>
+        <script src="./js/slider/views/Slide.js"></script>
+        <!-- script src="./js/slider/slides/controllers/sliderState.js"></script -->
+        <script>
+            (function(){
+
+                Slider.init({
+                    images:[
+                        {   
+                            title: 'img_1.jpg',
+                            url: './img/img_1.jpg',
+                            link: 'http://google.nl'
+                        },
+                        {   
+                            title: 'img_2.jpg',
+                            url: './img/img_2.jpg',
+                            link: 'http://google.nl'
+                        }
+                    ],
+                    target: 'header'
+                });
+                
+            }());
+        </script>
+    </body>
+</html>
