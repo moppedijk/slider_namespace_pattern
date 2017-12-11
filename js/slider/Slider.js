@@ -1,6 +1,7 @@
 // Structure
 // Clean up
 // Optimization
+// Simplify
 
 var Slider = Slider || {};
 Slider.views = Slider.views || {};
@@ -47,7 +48,7 @@ Slider.controllers = Slider.controllers || {};
 			label: 'right'
 		});
 
-		// Add to controller
+		// Construct controller
 		controller = new Slider.controllers.SliderController({
 			images: slides,
 			btnLeft: btnLeft,
