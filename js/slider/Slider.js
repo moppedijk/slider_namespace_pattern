@@ -24,28 +24,33 @@ Slider.controllers = Slider.controllers || {};
 
 	/* Render slider (public). */
 	Slider.start = function(props) {
-		var target,
-			images = props.images,
-			i,
-			slides = [],
+		var slides = [],
 			controller,
 			btnLeft,
 			btnRight;
-
-		// Target
-		target = document.getElementById(props.target);
 		
 		// Construct slides
-		for(i = 0; i < images.length; i++) {
-			slides.push(new Slider.views.Slide(images[i]));
+		for(var i = 0; i < props.images.length; i++) {
+			slides.push(new Slider.views.Slide(props.images[i]));
 		}
 
 		// Construct Btns
 		btnLeft = new Slider.views.Btn({
-			label: 'left'
+			label: 'left',
+			orientation: 'left'
 		});
+		
 		btnRight = new Slider.views.Btn({
-			label: 'right'
+			label: 'right',
+			orientation: 'right'
+		});
+		
+		// Render HTML elements
+		Slider.render({
+			images: slides,
+			btnLeft: btnLeft,
+			btnRight: btnRight,
+			target: props.target
 		});
 
 		// Construct controller
@@ -53,10 +58,28 @@ Slider.controllers = Slider.controllers || {};
 			images: slides,
 			btnLeft: btnLeft,
 			btnRight: btnRight,
-			target: target
+			target: props.target
 		});
 
-		// controller.yolo();
+		// Start at index controller
+		controller.startAt(0);
+	};
+
+	Slider.render = function(props) {
+		var target = document.getElementById(props.target),
+			html = '';
+
+		html += '<div class=\'slider\'>';
+		html += props.btnLeft.html;
+		html += props.btnRight.html;
+
+		for(var i = 0; i < props.images.length; i++) {
+			html+= props.images[i].html;
+		}
+
+		html += '</div>';
+
+		target.innerHTML = html;
 	};
 
 }());

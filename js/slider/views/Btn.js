@@ -1,6 +1,7 @@
 
 /* Generate html (public) */
 Slider.views.Btn = (function() {
+	
 	// Id
 	var id = 0;
 
@@ -8,8 +9,23 @@ Slider.views.Btn = (function() {
 	var generateHtml = function(props) {
 		var html = '';
 
-		html += '<div>';
-		html += '<a href=\'javascript:void(0);\'>' + props.label + '<a/>';
+		// Opening tag
+		switch(props.orientation) {
+		case 'left':
+			html += '<div class=\'slider__btn slider__btn--left\'>';
+			break;
+		case 'right':
+			html += '<div class=\'slider__btn slider__btn--right\'>';
+			break;
+		default:
+			html += '<div class=\'slider__btn\'>';
+			break;
+		}
+
+		// Anker
+		html += '<a class=\'slider__btnlink\' id=\'btn_' + id + '\' href=\'javascript:void(0);\'>' + props.label + '</a>';
+
+		// Closing tag
 		html += '</div>';
 
 		return html;
@@ -17,16 +33,22 @@ Slider.views.Btn = (function() {
 
 	// Return constructor
 	return function(props) {
-		id++;
-
 		if(!props.label) {
 			throw new Error('Label is not defined in btn');
 		}
 
+		if(!props.orientation) {
+			throw new Error('Define btn orientation left (string) or right (string)');
+		}
+
+		id++;
+
 		return {
-			id: id,
+			id: 'btn_' + id,
 			html: generateHtml(props),
-			visible: true
+			visible: true,
+			type: 'btn',
+			orientation: props.orientation
 		};
 	};
 
