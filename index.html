@@ -19,7 +19,9 @@
                 text-decoration: none;
                 color: #000000;
                 background-color: #ffffff;
-                padding: 20px;
+                height: 70px;
+                line-height: 70px;
+                padding: 0px 10px;
                 display: inline-block;
             }
             .slider__btn--prev{
@@ -36,13 +38,23 @@
                 height: 100%;
                 z-index: 1;
             }
+            .slider__title {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                text-align: center;
+                color: #ffffff;
+                height: 90px;
+                line-height: 90px;
+                font-size: 24px;
+            }
         </style>
     </head>
     <body>
         <header id='header'></header>
 
         <!-- Javascript -->
-        <!-- script src="./js/polyfill/ObjectAssign.js"></script -->
         <script src="./js/slider/slider.js"></script>
         <script src="./js/slider/controllers/SliderController.js"></script>
         <script src="./js/slider/views/Btn.js"></script>
@@ -53,23 +65,23 @@
                 slider.init({
                     images:[
                         {   
-                            title: 'img_1.jpg',
-                            url: './img/img_1.jpg',
+                            title: 'Afbeelding 1',
+                            url: 'http://lorempixel.com/728/90/sports/1/',
                             link: 'http://google.nl'
                         },
                         {   
-                            title: 'img_2.jpg',
-                            url: './img/img_2.jpg',
+                            title: 'Afbeelding 2',
+                            url: 'http://lorempixel.com/728/90/sports/2/',
                             link: 'http://google.nl'
                         },
                         {   
-                            title: 'img_3.jpg',
-                            url: './img/img_3.jpg',
+                            title: 'Afbeelding 3',
+                            url: 'http://lorempixel.com/728/90/sports/3/',
                             link: 'http://google.nl'
                         },
                         {   
-                            title: 'img_4.jpg',
-                            url: './img/img_4.jpg',
+                            title: 'Afbeelding 4',
+                            url: 'http://lorempixel.com/728/90/sports/5/',
                             link: 'http://google.nl'
                         }
                     ],
