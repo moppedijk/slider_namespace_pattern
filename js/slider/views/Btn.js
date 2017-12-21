@@ -1,15 +1,20 @@
 
-/* Generate html (public) */
-Slider.views.Btn = (function() {
+/* Btn IFFE */
+slider.views.Btn = (function() {
 	
-	// Id
-	var id = 0;
+	// Var declarions
+	var id = 0,
+		generateHtml;
 
-	// Generate Html
-	var generateHtml = function(props) {
+	/**
+	 * Generate html function
+	 * @private
+	 * @param {object} props - Html properties
+	 */
+	generateHtml = function(props) {
 		var html = '';
 
-		// Opening tag
+		// Opening tag (switch class)
 		switch(props.type) {
 		case 'prev':
 			html += '<div class=\'slider__btn slider__btn--prev\'>';
@@ -22,7 +27,7 @@ Slider.views.Btn = (function() {
 			break;
 		}
 
-		// Anker
+		// Add anker to html
 		html += '<a class=\'slider__btnlink\' id=\'' + props.htmlId + '\' href=\'javascript:void(0);\'>' + props.label + '</a>';
 
 		// Closing tag
@@ -31,19 +36,30 @@ Slider.views.Btn = (function() {
 		return html;
 	};
 
-	// Return constructor
-	return function(props) {
+	/**
+	 * return Btn constructor
+	 * @constructor
+	 * @param {object} props - The Btn properties
+	 */
+	return function Btn (props) {
+
+		// Var declarations
 		var htmlId,
 			type,
 			label;
 
-		// Increment id	
+		// Increment constructor id	
 		id++;
 
+		// Define props
 		htmlId = 'btn_' + id;
-		type = props.type;
-		label = props.label;
+		type = props.type || false;
+		label = props.label || 'btn';
 
+		/**
+		 * Get html function
+		 * @public
+		 */
 		this.getHtml = function() {
 			return generateHtml({
 				htmlId: htmlId,
@@ -52,15 +68,27 @@ Slider.views.Btn = (function() {
 			});
 		};
 
+		/**
+		 * Get id function
+		 * @public
+		 */
 		this.getId = function() {
 			return id;
 		};
 
+		/**
+		 * Get html id
+		 * @public
+		 */
 		this.getHtmlId = function() {
 			return htmlId;
 		};
 
-		this.gettype = function() {
+		/**
+		 * Get type
+		 * @public
+		 */
+		this.getType = function() {
 			return type;
 		};
 	};

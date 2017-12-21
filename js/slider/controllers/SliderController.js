@@ -1,24 +1,37 @@
 
-/* Slider Controller */
-Slider.controllers.SliderController = (function() {
+/* SliderController IIFE */
+slider.controllers.SliderController = (function() {
 
-	// Slide Index
-	var slideIndex;
+	// Var declarations
+	var slideIndex,
+		slides,
+		onBtnPrevClick,
+		onBtnNextClick,
+		showSlide,
+		next,
+		prev;
 
-	// Slides
-	var slides;
-
-	// On Btn Click Handler
-	var onbtnPrevClick = function(e) {
+	/**
+	 * On Btn Prev Click handler
+	 * @private
+	 */
+	onBtnPrevClick = function() {
 		prev();
 	};
 
-	// On Btn Click Handler
-	var onbtnNextClick = function(e) {
+	/**
+	 * On Btn Click handler
+	 * @private
+	 */
+	onBtnNextClick = function() {
 		next();
 	};
 
-	var showSlide = function(index) {
+	/**
+	 * Show slide function
+	 * @private
+	 */
+	showSlide = function(index) {
 		if(index > slides.length) {
 			throw new Error('Show Slide index is to large! It needs to be smaller or equal to: ' + slides.length);
 		}else {
@@ -32,8 +45,11 @@ Slider.controllers.SliderController = (function() {
 		}
 	};
 
-	// Btn right
-	var next = function() {
+	/**
+	 * Next slide function
+	 * @private
+	 */
+	next = function() {
 		if(slideIndex >= (slides.length - 1)) {
 			showSlide(0);
 			slideIndex = 0;
@@ -43,8 +59,11 @@ Slider.controllers.SliderController = (function() {
 		}
 	};
 
-	// Btn left
-	var prev = function() {
+	/**
+	 * Prev slide function
+	 * @private
+	 */
+	prev = function() {
 		if(slideIndex <= 0) {
 			showSlide((slides.length -1));
 			slideIndex = (slides.length - 1);
@@ -54,21 +73,29 @@ Slider.controllers.SliderController = (function() {
 		}
 	};
 
-	// Return constructor
-	return function(props) {
+	/**
+	 * Slide Controller constructor
+	 * @constructor
+	 * @param {object} props - SLide Controller properties
+	 */
+	return function SlideController (props) {
 		var btnNext,
 			btnPrev;
 
 		// Slides
-		slides = props.images;
+		slides = props.images || false;
 
 		// Buttons
 		btnPrev = document.getElementById(props.btnPrev.getHtmlId());
 		btnNext = document.getElementById(props.btnNext.getHtmlId());
-		btnPrev.addEventListener('click', onbtnPrevClick);
-		btnNext.addEventListener('click', onbtnNextClick);
+		btnPrev.addEventListener('click', onBtnPrevClick);
+		btnNext.addEventListener('click', onBtnNextClick);
 
-		// Start Controller
+		/**
+		 * Start at function
+		 * @public
+		 * @param {number} index 
+		 */
 		this.startAt = function(index) {
 			slideIndex = index || 0;
 			showSlide(slideIndex);

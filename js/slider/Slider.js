@@ -1,29 +1,41 @@
-// Structure
-// Clean up
-// Optimization
-// Simplify
+// Namespace
+var slider = slider || {};
+slider.views = slider.views || {};
+slider.controllers = slider.controllers || {};
 
-var Slider = Slider || {};
-Slider.views = Slider.views || {};
-Slider.controllers = Slider.controllers || {};
-
+/* IIFE */
 (function(){
 
-	/* Initialize (public). */
-	Slider.init = function(props) {
+	/** 
+	 * Initialize function 
+	 * @public
+	 * @param {object} props - Slide init properties
+	 */
+	slider.init = function init (props) {
+
+		// Check if props is true
 		if(!props) {
-			throw new Error('slider init has no props');
+			throw new Error('Slider init has no props');
 		}
 
+		// Check if props has images and target
 		if(props.images && props.target) {
-			Slider.start(props);
+			
+			// Start slider
+			slider.start(props);
 		}else {
-			throw new Error('images or target are not defined in init');
+			throw new Error('Images or target are not defined in init');
 		}
 	};
 
-	/* Start slider (public). */
-	Slider.start = function(props) {
+	/** 
+	 * Start slider function. 
+	 * @public
+	 * @param {object} props - Same props as init
+	 */
+	slider.start = function start (props) {
+
+		// Var declarations
 		var slides = [],
 			controller,
 			btnPrev,
@@ -31,22 +43,23 @@ Slider.controllers = Slider.controllers || {};
 		
 		// Construct slides	
 		for(var i = 0; i < props.images.length; i++) {
-			slides.push(new Slider.views.Slide(props.images[i]));
+			slides.push(new slider.views.Slide(props.images[i]));
 		}
 
-		// Construct Btns
-		btnPrev = new Slider.views.Btn({
+		// Construct Btn prev
+		btnPrev = new slider.views.Btn({
 			label: 'left',
 			type: 'prev'
 		});
 		
-		btnNext = new Slider.views.Btn({
+		// Contruct Btn next
+		btnNext = new slider.views.Btn({
 			label: 'right',
 			type: 'next'
 		});
 		
-		// Render HTML elements
-		Slider.render({
+		// Render HTML elements in target
+		slider.render({
 			images: slides,
 			btnPrev: btnPrev,
 			btnNext: btnNext,
@@ -54,31 +67,43 @@ Slider.controllers = Slider.controllers || {};
 		});
 
 		// Construct controller
-		controller = new Slider.controllers.SliderController({
+		controller = new slider.controllers.SliderController({
 			images: slides,
 			btnPrev: btnPrev,
 			btnNext: btnNext
 		});
 
-		// Start at index controller
+		// Start at controller index
 		controller.startAt(0);
 	};
 
-	/* Render slider */
-	Slider.render = function(props) {
+	/** 
+	 * Render slider function 
+	 * @public
+	 * @param {object} props - The html render props
+	 */
+	slider.render = function render (props) {
+
+		// Var declarations
 		var target = document.getElementById(props.target),
 			html = '';
 
+		// Start html
 		html += '<div class=\'slider\'>';
+
+		// Add buttons
 		html += props.btnPrev.getHtml();
 		html += props.btnNext.getHtml();
 
+		// Loop trough images
 		for(var i = 0; i < props.images.length; i++) {
 			html+= props.images[i].getHtml();
 		}
 
+		// End html
 		html += '</div>';
 
+		// Add html to target
 		target.innerHTML = html;
 	};
 
