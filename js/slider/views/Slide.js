@@ -17,6 +17,7 @@ slider.views.Slide = (function() {
 		var html = '';
 
 		html += '<div id=\'' + props.htmlId + '\' class=\'slider__slide\'>';
+		html += '<div \' class=\'slider__title\'>' + props.title + '</div>';
 		html += '<img class=\'slider__image\' src=\'' + props.url + '\' alt=\'image\' />';
 		html += '</div>';
 
