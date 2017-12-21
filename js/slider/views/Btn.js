@@ -10,12 +10,12 @@ Slider.views.Btn = (function() {
 		var html = '';
 
 		// Opening tag
-		switch(props.orientation) {
-		case 'left':
-			html += '<div class=\'slider__btn slider__btn--left\'>';
+		switch(props.type) {
+		case 'prev':
+			html += '<div class=\'slider__btn slider__btn--prev\'>';
 			break;
-		case 'right':
-			html += '<div class=\'slider__btn slider__btn--right\'>';
+		case 'next':
+			html += '<div class=\'slider__btn slider__btn--next\'>';
 			break;
 		default:
 			html += '<div class=\'slider__btn\'>';
@@ -23,7 +23,7 @@ Slider.views.Btn = (function() {
 		}
 
 		// Anker
-		html += '<a class=\'slider__btnlink\' id=\'btn_' + id + '\' href=\'javascript:void(0);\'>' + props.label + '</a>';
+		html += '<a class=\'slider__btnlink\' id=\'' + props.htmlId + '\' href=\'javascript:void(0);\'>' + props.label + '</a>';
 
 		// Closing tag
 		html += '</div>';
@@ -33,22 +33,35 @@ Slider.views.Btn = (function() {
 
 	// Return constructor
 	return function(props) {
-		if(!props.label) {
-			throw new Error('Label is not defined in btn');
-		}
+		var htmlId,
+			type,
+			label;
 
-		if(!props.orientation) {
-			throw new Error('Define btn orientation left (string) or right (string)');
-		}
-
+		// Increment id	
 		id++;
 
-		return {
-			id: 'btn_' + id,
-			html: generateHtml(props),
-			visible: true,
-			type: 'btn',
-			orientation: props.orientation
+		htmlId = 'btn_' + id;
+		type = props.type;
+		label = props.label;
+
+		this.getHtml = function() {
+			return generateHtml({
+				htmlId: htmlId,
+				type: type,
+				label: label
+			});
+		};
+
+		this.getId = function() {
+			return id;
+		};
+
+		this.getHtmlId = function() {
+			return htmlId;
+		};
+
+		this.gettype = function() {
+			return type;
 		};
 	};
 

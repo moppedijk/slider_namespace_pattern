@@ -29,12 +29,18 @@ Slider.views.Slide = (function() {
 
 	// Return constructor
 	return function(props) {
+		var htmlId,
+			url,
+			title,
+			link;
+
+		// Increment id
 		id++;
 
-		var htmlId = 'image_' + id;
-		var url = props.url;
-		var title = props.title;
-		var link = props.link;
+		htmlId = 'image_' + id;
+		url = props.url;
+		title = props.title;
+		link = props.link;
 		
 		this.getHtml = function() {
 			return generateHtml({
@@ -62,7 +68,7 @@ Slider.views.Slide = (function() {
 		};
 
 		this.getUrl = function() {
-			return slideUrl;
+			return url;
 		};
 	};
 

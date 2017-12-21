@@ -9,12 +9,12 @@ Slider.controllers.SliderController = (function() {
 	var slides;
 
 	// On Btn Click Handler
-	var onBtnLeftClick = function(e) {
+	var onbtnPrevClick = function(e) {
 		prev();
 	};
 
 	// On Btn Click Handler
-	var onbtnRightClick = function(e) {
+	var onbtnNextClick = function(e) {
 		next();
 	};
 
@@ -56,15 +56,17 @@ Slider.controllers.SliderController = (function() {
 
 	// Return constructor
 	return function(props) {
+		var btnNext,
+			btnPrev;
 
 		// Slides
 		slides = props.images;
 
 		// Buttons
-		var btnLeft = document.getElementById(props.btnLeft.id);
-		var btnRight = document.getElementById(props.btnRight.id);
-		btnLeft.addEventListener('click', onBtnLeftClick);
-		btnRight.addEventListener('click', onbtnRightClick);
+		btnPrev = document.getElementById(props.btnPrev.getHtmlId());
+		btnNext = document.getElementById(props.btnNext.getHtmlId());
+		btnPrev.addEventListener('click', onbtnPrevClick);
+		btnNext.addEventListener('click', onbtnNextClick);
 
 		// Start Controller
 		this.startAt = function(index) {
