@@ -8,22 +8,61 @@ Slider.views.Slide = (function() {
 	var generateHtml = function(props) {
 		var html = '';
 
-		html += '<div id=\'image_' + id + '\' class=\'slider__slide\'>';
+		html += '<div id=\'' + props.htmlId + '\' class=\'slider__slide\'>';
 		html += '<img class=\'slider__image\' src=\'' + props.url + '\' alt=\'image\' />';
 		html += '</div>';
 
 		return html;
 	};
 
+	// Show element
+	var show = function(htmlId) {
+		var target = document.getElementById(htmlId);
+		target.style.display = "block";
+	};
+
+	// Hide element
+	var hide = function(htmlId) {
+		var target = document.getElementById(htmlId);
+		target.style.display = "none";
+	};
+
 	// Return constructor
 	return function(props) {
 		id++;
 
-		return {
-			id: 'image_' + id,
-			html: generateHtml(props),
-			visible: true,
-			type: 'image'
+		var htmlId = 'image_' + id;
+		var url = props.url;
+		var title = props.title;
+		var link = props.link;
+		
+		this.getHtml = function() {
+			return generateHtml({
+				htmlId: htmlId,
+				url: url,
+				title: title,
+				link: link
+			});
+		};
+
+		this.show = function() {
+			show(htmlId);
+		};
+
+		this.hide = function() {
+			hide(htmlId);
+		};
+
+		this.getId = function() {
+			return id;
+		};
+
+		this.getHtmlId = function() {
+			return htmlId;
+		};
+
+		this.getUrl = function() {
+			return slideUrl;
 		};
 	};
 

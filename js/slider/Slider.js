@@ -29,7 +29,7 @@ Slider.controllers = Slider.controllers || {};
 			btnLeft,
 			btnRight;
 		
-		// Construct slides
+		// Construct slides	
 		for(var i = 0; i < props.images.length; i++) {
 			slides.push(new Slider.views.Slide(props.images[i]));
 		}
@@ -74,7 +74,7 @@ Slider.controllers = Slider.controllers || {};
 		html += props.btnRight.html;
 
 		for(var i = 0; i < props.images.length; i++) {
-			html+= props.images[i].html;
+			html+= props.images[i].getHtml();
 		}
 
 		html += '</div>';

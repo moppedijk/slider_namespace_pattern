@@ -5,34 +5,53 @@ Slider.controllers.SliderController = (function() {
 	// Slide Index
 	var slideIndex;
 
+	// Slides
 	var slides;
-	
-	// Btn left
-	var btnLeft = false;
-
-	// Btn right
-	var btnRight = false;
 
 	// On Btn Click Handler
 	var onBtnLeftClick = function(e) {
-		next();
+		prev();
 	};
 
 	// On Btn Click Handler
 	var onbtnRightClick = function(e) {
-		prev();
+		next();
 	};
 
 	var showSlide = function(index) {
-
+		if(index > slides.length) {
+			throw new Error('Show Slide index is to large! It needs to be smaller or equal to: ' + slides.length);
+		}else {
+			for(var i = 0; i < slides.length; i++) {
+				if(slides.indexOf(slides[i]) === index) {
+					slides[i].show();
+				}else {
+					slides[i].hide();
+				}
+			}
+		}
 	};
 
+	// Btn right
 	var next = function() {
-
+		if(slideIndex >= (slides.length - 1)) {
+			showSlide(0);
+			slideIndex = 0;
+		}else {
+			slideIndex++;
+			showSlide(slideIndex);
+		}
 	};
 
+	// Btn left
 	var prev = function() {
-
+		if(slideIndex <= 0) {
+			showSlide((slides.length -1));
+			slideIndex = (slides.length - 1);
+		}else {
+			slideIndex--;
+			showSlide(slideIndex);
+		}
 	};
 
 	// Return constructor
@@ -42,8 +61,8 @@ Slider.controllers.SliderController = (function() {
 		slides = props.images;
 
 		// Buttons
-		btnLeft = document.getElementById(props.btnLeft.id);
-		btnRight = document.getElementById(props.btnRight.id);
+		var btnLeft = document.getElementById(props.btnLeft.id);
+		var btnRight = document.getElementById(props.btnRight.id);
 		btnLeft.addEventListener('click', onBtnLeftClick);
 		btnRight.addEventListener('click', onbtnRightClick);
 
@@ -52,15 +71,6 @@ Slider.controllers.SliderController = (function() {
 			slideIndex = index || 0;
 			showSlide(slideIndex);
 		};
-
-		this.nextSlide = function() {
-			next();
-		};
-
-		this.prevSlide = function() {
-			prev();
-		};
-
 	};
 
 }());
